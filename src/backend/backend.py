@@ -17,7 +17,6 @@ from urllib.parse import urlparse
 
 import aiohttp
 import nio
-import plyer
 import pyotherside
 import simpleaudio
 from appdirs import AppDirs
@@ -589,22 +588,7 @@ class Backend:
         self, title: str, body: str = "", image: Union[Path, str] = "",
     ) -> None:
         # XXX: images on windows must be .ICO
-
-        try:
-            plyer.notification.notify(
-                title    = title,
-                message  = body,
-                app_name = __app_name__,
-                app_icon = str(image),
-                timeout  = 10,
-                toast    = False,
-            )
-            self.notifications_working = True
-        except Exception:  # noqa
-            if self.notifications_working:
-                trace = traceback.format_exc().rstrip()
-                log.error("Sending desktop notification failed\n%s", trace)
-                self.notifications_working = False
+        pass
 
 
     async def sound_notify(self) -> None:
